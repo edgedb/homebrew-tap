@@ -12,3 +12,12 @@ Or `brew tap edgedb/tap` and then `brew install <formula>`.
 
 ## Documentation
 `brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+
+## How to auto-update versions from published JSON indexes?
+```
+$ curl -H "Accept: application/vnd.github.everest-preview+json" \
+       -H "Authorization: Bearer $GITHUB_TOKEN" \
+       -H "Content-Type: application/json" \
+       --data '{"event_type": "autoupdate"}' \
+       https://api.github.com/repos/edgedb/homebrew-tap/dispatches
+```
