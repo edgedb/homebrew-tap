@@ -10,7 +10,7 @@ class EdgedbCli < Formula
   end
 
   def self.download_file_path
-    "edgedb-cli_1.0.0-alpha.5_2020082622"
+    "edgedb-cli_1.0.0-alpha.5_2020082816"
   end
 
   def self.download_sha256_checksum
