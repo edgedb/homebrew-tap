@@ -30,8 +30,6 @@ def query_latest_version(*, nightly: bool) -> Tuple[Version, RemoteFilePath]:
             continue
         if package["version"] in VERSION_BLOCKLIST:
             continue
-        if nightly != ("nightly" in package["architecture"]):
-            continue
         path = package["installref"].split("/")[-1]
         versions_to_paths[package["version"]] = path
     latest_version = sorted(versions_to_paths, reverse=True)[0]
