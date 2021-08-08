@@ -10,7 +10,7 @@ class EdgedbCliNightly < Formula
   end
 
   def self.download_file_path
-    "edgedb-cli_1.0.0-beta.2+d20210807.gba2c70f52_202108070009~nightly"
+    "edgedb-cli_1.0.0-beta.2+d20210808.g121de78de_202108080008~nightly"
   end
 
   def self.download_sha256_checksum
@@ -21,7 +21,7 @@ class EdgedbCliNightly < Formula
   homepage "https://github.com/edgedb/edgedb-cli"
   url "https://packages.edgedb.com/archive/#{plat}.nightly/#{download_file_path}?edgedb.nightly",
     :using => :nounzip
-  version "1.0.0-beta.2+d20210807.gba2c70f52"
+  version "1.0.0-beta.2+d20210808.g121de78de"
   sha256 download_sha256_checksum
   bottle :unneeded
 
