@@ -10,7 +10,7 @@ class EdgedbCli < Formula
   end
 
   def self.download_file_path
-    "edgedb-cli_1.0.0-rc.3_202111301937"
+    "edgedb-cli-1.0.0-rc.4+1f5fa8f"
   end
 
   def self.download_sha256_checksum
@@ -21,7 +21,7 @@ class EdgedbCli < Formula
   homepage "https://github.com/edgedb/edgedb-cli"
   url "https://packages.edgedb.com/archive/#{plat}/#{download_file_path}?edgedb.latest",
     :using => :nounzip
-  version "1.0.0-rc.3"
+  version "1.0.0-rc.4+1f5fa8f"
   sha256 download_sha256_checksum
   bottle :unneeded
 
