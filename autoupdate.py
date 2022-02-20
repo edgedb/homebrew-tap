@@ -3,8 +3,11 @@ from __future__ import annotations
 from typing import *
 
 import json
+import functools
 import pathlib
 import urllib.request
+
+import semver
 
 
 if TYPE_CHECKING:
@@ -14,8 +17,8 @@ if TYPE_CHECKING:
 
 CURRENT_DIR = pathlib.Path(__file__).parent
 JSON_INDEXES = {
-    "release": "https://packages.edgedb.com/archive/.jsonindexes/macos-x86_64.json",
-    "nightly": "https://packages.edgedb.com/archive/.jsonindexes/macos-x86_64.nightly.json",
+    "release": "https://packages.edgedb.com/archive/.jsonindexes/x86_64-apple-darwin.json",
+    "nightly": "https://packages.edgedb.com/archive/.jsonindexes/x86_64-apple-darwin.nightly.json",
 }
 VERSION_BLOCKLIST = {"1.0a3"}
 
@@ -32,7 +35,11 @@ def query_latest_version(*, nightly: bool) -> Tuple[Version, RemoteFilePath]:
             continue
         path = package["installref"].split("/")[-1]
         versions_to_paths[package["version"]] = path
-    latest_version = sorted(versions_to_paths, reverse=True)[0]
+    latest_version = sorted(
+        versions_to_paths,
+        key=functools.cmp_to_key(semver.compare),
+        reverse=True,
+    )[0]
     return latest_version, versions_to_paths[latest_version]
 
 

@@ -3,14 +3,14 @@ require "json"
 class EdgedbCliNightly < Formula
   def self.plat
     if OS.mac?
-      "macos-x86_64"
+      "x86_64-apple-darwin"
     elsif OS.linux?
-      "linux-x86_64" if Hardware::CPU.intel?
+      "x86_64-unknown-linux-musl"
     end
   end
 
   def self.download_file_path
-    "edgedb-cli_1.0.0-rc.2+d20211201.g6571cde82_202112010010~nightly"
+    "edgedb-cli-1.1.0-dev.741+25848a8"
   end
 
   def self.download_sha256_checksum
@@ -21,7 +21,7 @@ class EdgedbCliNightly < Formula
   homepage "https://github.com/edgedb/edgedb-cli"
   url "https://packages.edgedb.com/archive/#{plat}.nightly/#{download_file_path}?edgedb.nightly",
     :using => :nounzip
-  version "1.0.0-rc.2+d20211201.g6571cde82"
+  version "1.1.0-dev.741+25848a8"
   sha256 download_sha256_checksum
   bottle :unneeded
 
