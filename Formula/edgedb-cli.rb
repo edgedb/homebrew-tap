@@ -20,16 +20,15 @@ class EdgedbCli < Formula
   desc "Latest release of the EdgeDB command-line client (edgedb)"
   homepage "https://github.com/edgedb/edgedb-cli"
   url "https://packages.edgedb.com/archive/#{plat}/#{download_file_path}?edgedb.latest",
-    :using => :nounzip
+    using: :nounzip
   version "1.0.0+7b66089"
   sha256 download_sha256_checksum
-  bottle :unneeded
 
   def install
     bin.install "edgedb.latest" => "edgedb"
   end
 
   test do
-    system "#{bin}/edgedb --version"
+    system "#{bin}/edgedb", "--version"
   end
 end

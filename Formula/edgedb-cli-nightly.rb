@@ -20,16 +20,15 @@ class EdgedbCliNightly < Formula
   desc "Nightly build of the EdgeDB command-line client (edgedb)"
   homepage "https://github.com/edgedb/edgedb-cli"
   url "https://packages.edgedb.com/archive/#{plat}.nightly/#{download_file_path}?edgedb.nightly",
-    :using => :nounzip
+    using: :nounzip
   version "1.1.0-dev.741+25848a8"
   sha256 download_sha256_checksum
-  bottle :unneeded
 
   def install
     bin.install "edgedb.nightly" => "edgedb-nightly"
   end
 
   test do
-    system "#{bin}/edgedb-nightly --version"
+    system "#{bin}/edgedb-nightly", "--version"
   end
 end
