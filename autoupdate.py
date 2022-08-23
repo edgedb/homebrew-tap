@@ -138,7 +138,7 @@ def get_tpl_data(channel: str) -> dict[str, Any]:
 
 
 def render_formula(path: pathlib.Path, channel: str) -> None:
-    tplfile = CURRENT_DIR / "Formula.tpl.rb"
+    tplfile = CURRENT_DIR / "Formula.rb.tpl"
     if not tplfile.exists():
         die(f'template does not exist: {tplfile}')
 
