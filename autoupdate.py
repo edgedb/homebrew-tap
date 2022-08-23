@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 from __future__ import annotations
-from typing import *
+from typing import (
+    TYPE_CHECKING,
+    Any,
+    NoReturn,
+    TypedDict,
+)
 
 import json
 import functools
 import pathlib
+import sys
 import urllib.request
 
+import jinja2
 import semver
 
 
@@ -15,67 +22,140 @@ if TYPE_CHECKING:
     RemoteFilePath = str
 
 
+class Prerelease(TypedDict):
+    phase: str
+    number: int
+
+
+class Version(TypedDict):
+    major: int
+    minor: int | None
+    patch: int | None
+    prerelease: list[Prerelease]
+    metadata: dict[str, str]
+
+
+def version_to_str(v: Version) -> str:
+    result = str(v["major"])
+    if v["minor"] is not None:
+        result += f".{v['minor']}"
+    if v["patch"] is not None:
+        result += f".{v['patch']}"
+    if v["prerelease"]:
+        result += "-" + ".".join(
+            f"{p['phase']}.{p['number']}" for p in v["prerelease"])
+
+    return result
+
+
+class InstallRef(TypedDict):
+    ref: str
+    type: str | None
+    encoding: str | None
+    verification: dict[str, str | int]
+
+
+class Package(TypedDict):
+    basename: str  # edgedb-server
+    slot: str | None  # 1-alpha6-dev5069
+    name: str  # edgedb-server-1-alpha6-dev5069
+    version: str  # 1.0a6.dev5069+g0839d6e8
+    version_details: Version
+    version_key: str  # 1.0.0~alpha.6~dev.5069.2020091300~nightly
+    architecture: str  # x86_64
+    revision: str  # 2020091300~nightly
+    installrefs: list[InstallRef]
+    installref: str
+
+
+INDEX_URL = "https://packages.edgedb.com/archive/.jsonindexes"
 CURRENT_DIR = pathlib.Path(__file__).parent
-JSON_INDEXES = {
-    "release": "https://packages.edgedb.com/archive/.jsonindexes/x86_64-apple-darwin.json",
-    "nightly": "https://packages.edgedb.com/archive/.jsonindexes/x86_64-apple-darwin.nightly.json",
-}
 VERSION_BLOCKLIST = {"1.0a3"}
 
 
-def query_latest_version(*, nightly: bool) -> Tuple[Version, RemoteFilePath]:
-    kind = "nightly" if nightly else "release"
-    with urllib.request.urlopen(JSON_INDEXES[kind]) as url:
+jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(CURRENT_DIR))
+
+
+def die(msg: str) -> NoReturn:
+    print(msg, file=sys.stderr)
+    sys.exit(1)
+
+
+def query_latest_version(index: str) -> Package:
+    with urllib.request.urlopen(f"{INDEX_URL}/{index}.json") as url:
         indexes = json.load(url)
-    versions_to_paths: Dict[Version, RemoteFilePath] = {}
+    versions: dict[Version, Package] = {}
     for package in indexes["packages"]:
         if not package["name"] == "edgedb-cli":
             continue
         if package["version"] in VERSION_BLOCKLIST:
             continue
-        path = package["installref"].split("/")[-1]
-        versions_to_paths[package["version"]] = path
+        versions[package["version"]] = package
     latest_version = sorted(
-        versions_to_paths,
+        versions,
         key=functools.cmp_to_key(semver.compare),
         reverse=True,
     )[0]
-    return latest_version, versions_to_paths[latest_version]
+    return versions[latest_version]
 
 
-def update_in_place(path: pathlib.Path, *, nightly: bool) -> None:
-    version, remote_file_path = query_latest_version(nightly=nightly)
-    kind = "nightly" if nightly else "release"
-    with path.open() as source:
-        source_lines = source.readlines()
+def get_tpl_data(channel: str) -> dict[str, Any]:
+    targets = [
+        "x86_64-apple-darwin",
+        "aarch64-apple-darwin",
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-musl",
+    ]
+
+    suffix = "" if channel == "release" else f".{channel}"
+
+    packages = {
+        target: query_latest_version(target + suffix)
+        for target in targets
+    }
+
+    versions = {
+        version_to_str(v["version_details"])
+        for v in packages.values()
+    }
+    if len(versions) > 1:
+        die(f"target versions don't match: {', '.join(sorted(versions))}")
+
+    artifacts = {}
+    for target, package in packages.items():
+        for installref in package["installrefs"]:
+            if installref["encoding"] == "identity":
+                artifacts[target] = {
+                    "url": "https://packages.edgedb.com" + installref["ref"],
+                    "sha256": installref["verification"]["sha256"],
+                }
+
+    return {
+        "version": next(iter(versions)),
+        "artifacts": artifacts,
+        "channel": channel,
+    }
+
+
+def render_formula(path: pathlib.Path, channel: str) -> None:
+    tplfile = CURRENT_DIR / "Formula.tpl.rb"
+    if not tplfile.exists():
+        die(f'template does not exist: {tplfile}')
+
+    with open(tplfile) as f:
+        tpl = jinja_env.from_string(f.read())
+
+    output = tpl.render(get_tpl_data(channel))
 
     with path.open("w") as target:
-        expect_download_file_path = False
-        for line in source_lines:
-            line_s = line.strip()
-            if expect_download_file_path and line_s.startswith('"'):
-                new = f'"{remote_file_path}"'
-                if line_s != new:
-                    print(f"in {kind}: s/{line_s}/{new}/")
-                print("    " + new, file=target)
-                expect_download_file_path = False
-                continue
-            if line_s.startswith("version"):
-                new = f'version "{version}"'
-                if line_s != new:
-                    print(f"in {kind}: s/{line_s}/{new}/")
-                print("  " + new, file=target)
-                continue
-            if line_s.startswith("def self.download_file_path"):
-                expect_download_file_path = True
-            print(line.rstrip(), file=target)
+        print(output, file=target)
 
 
 def main() -> None:
     release_cli = CURRENT_DIR / "Formula" / "edgedb-cli.rb"
     nightly_cli = CURRENT_DIR / "Formula" / "edgedb-cli-nightly.rb"
-    update_in_place(release_cli, nightly=False)
-    update_in_place(nightly_cli, nightly=True)
+    render_formula(release_cli, channel="release")
+    render_formula(nightly_cli, channel="nightly")
 
 
 if __name__ == "__main__":
