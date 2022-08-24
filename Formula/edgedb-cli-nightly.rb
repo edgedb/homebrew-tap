@@ -19,13 +19,13 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-2.1.0-dev.839+d478843?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-2.1.0-dev.839+8ce2ced?edgedb.nightly",
         using: :nounzip
-      sha256 "290d28410a6f5defad1abdaea4fa6f271ab6831b492edb8e709609a5e6c2f437"
+      sha256 "a588bb22f70699d981b4f21ab3dc43e8efc9cf36b9d885c0a1038550615f1c47"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-2.1.0-dev.839+8e71bd8?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-2.1.0-dev.839+59bac54?edgedb.nightly",
         using: :nounzip
-      sha256 "472a9742e12c439eeca094253f41090e123179784e29d1ee6fa2abdfa724753c"
+      sha256 "255e28e818d49117eb5dc819dfcbe1bd6e01766074a700851f79d1522b77e293"
     else
       odie "Unsupported CPU architecture!"
     end
