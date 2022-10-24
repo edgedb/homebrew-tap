@@ -5,13 +5,13 @@ class EdgedbCliNightly < Formula
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.858+d7beb65?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.858+0c7f718?edgedb.nightly",
         using: :nounzip
-      sha256 "73ab2dbfcf4e3a190d00cac366521281252a7597902b0d10e7888d61ff61cd2d"
+      sha256 "59162c088b603bb857eca7690a481b8c6a774ffe9391f745264025ed333986c5"
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.858+5c519e0?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.858+2349736?edgedb.nightly",
         using: :nounzip
-      sha256 "d20089fce59efc8c0a0bd8503f5f3e69bc01b592ffccfe5efb8a7fb9a6239d93"
+      sha256 "a32987ebabc5d961993e10e08f78cbd5f411f53f168248e2a15dd8d089505e86"
     else
       odie "Unsupported CPU architecture!"
     end
