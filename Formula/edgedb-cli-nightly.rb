@@ -5,9 +5,9 @@ class EdgedbCliNightly < Formula
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.865+2234c1e?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.865+1058fe8?edgedb.nightly",
         using: :nounzip
-      sha256 "fabc91fa02caad6abe16bce3aa85b3ae33111ab141e9faf55b856461c1fc51b4"
+      sha256 "8f0754e8e8e052a672aea5172d1db8ceacc8fbb812e0f0448005a6940c09919e"
     elsif Hardware::CPU.intel?
       url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-2.1.0-dev.865+2234c1e?edgedb.nightly",
         using: :nounzip
