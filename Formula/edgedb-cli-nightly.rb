@@ -23,9 +23,9 @@ class EdgedbCliNightly < Formula
         using: :nounzip
       sha256 "9abfc6958b24c7d2fe60740ffba8c86a1b01056ce4dbf95c83f21a70d78e70b3"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-2.2.0-dev.872+5b9328f?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-2.2.0-dev.872+286df53?edgedb.nightly",
         using: :nounzip
-      sha256 "2526b211fb314a96adccf1d55354a917bdb3ff8fff69a6e05f4860d59e24bba9"
+      sha256 "5b9916b54c12d6e5301d8d379de04e5c0cc9abb086d7fb4aff79eeb32e355da9"
     else
       odie "Unsupported CPU architecture!"
     end
