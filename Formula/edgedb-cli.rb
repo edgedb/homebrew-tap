@@ -1,17 +1,17 @@
 class EdgedbCli < Formula
   desc "Latest release of the EdgeDB command-line client (edgedb)"
   homepage "https://github.com/edgedb/edgedb-cli"
-  version "2.1.0"
+  version "2.2.5"
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin/edgedb-cli-2.1.0+527e309?edgedb.release",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin/edgedb-cli-2.2.5+cd928ff?edgedb.release",
         using: :nounzip
-      sha256 "34d882570953bed13c0bb40a7b1b9e8990c4d6e26b563ec209ef5f9cf4339f0d"
+      sha256 "95ca5f68805869d516339e4e039a707dffb82c42f4c2e12b2dda3841e8f80455"
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin/edgedb-cli-2.1.0+527e309?edgedb.release",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin/edgedb-cli-2.2.5+67a3fb9?edgedb.release",
         using: :nounzip
-      sha256 "4edf1a99c65f64b88d6e11db90cc3391ef16e1dc40a3487f3e6e18773df94a98"
+      sha256 "248bfa8488c415150641ce64723761c0f17b6daf161bcd434862dc2975149157"
     else
       odie "Unsupported CPU architecture!"
     end
@@ -19,13 +19,13 @@ class EdgedbCli < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl/edgedb-cli-2.1.0+9678ffe?edgedb.release",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl/edgedb-cli-2.2.5+22f1ba4?edgedb.release",
         using: :nounzip
-      sha256 "4373e10908de6cf586a53dd811213fb4ccc07d074b9d9f17122281dcc6ddec5d"
+      sha256 "e92ef4700fde89005f87046ceb9bc570692bdbf504f4bae4677f670d6b1f5378"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl/edgedb-cli-2.1.0+e136de4?edgedb.release",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl/edgedb-cli-2.2.5+dcbdfc0?edgedb.release",
         using: :nounzip
-      sha256 "80806410164690678f31d0e66a864353896e5201dbea10c4ceaba0a90c8b85b4"
+      sha256 "6f062fadcab185ed9b3c89afaa44219c1652eeb2f765c67d26eb26c1e56b65ad"
     else
       odie "Unsupported CPU architecture!"
     end
