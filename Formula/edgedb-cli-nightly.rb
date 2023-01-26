@@ -9,9 +9,9 @@ class EdgedbCliNightly < Formula
         using: :nounzip
       sha256 "d611d9f98952f005a775ab7965b488c86fe1eba2ff28c397a6ab25c0b73b9a74"
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-2.3.0-dev.905+31d8b77?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-2.3.0-dev.905+089748d?edgedb.nightly",
         using: :nounzip
-      sha256 "361f46fb1eb9e76a766d7ce9b2f516ebc994a526f24c4cd3894152c44383374b"
+      sha256 "7f878d77f6e3c57d11d9c15533631b0b335669a42cd019e9ea6b0e35fdc69134"
     else
       odie "Unsupported CPU architecture!"
     end
@@ -19,9 +19,9 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-2.3.0-dev.905+6504bdb?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-2.3.0-dev.905+2589421?edgedb.nightly",
         using: :nounzip
-      sha256 "96753773e878139e1a76a32f4120164d90b3dee49b19a3952b8e4a85395f91e8"
+      sha256 "69d6a88eaeef7aa9f9e85c136628976df643421f5481f7d28b6eb3b52dc328c5"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-2.3.0-dev.905+0c7f7b1?edgedb.nightly",
         using: :nounzip
