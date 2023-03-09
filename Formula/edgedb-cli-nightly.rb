@@ -1,17 +1,17 @@
 class EdgedbCliNightly < Formula
   desc "Latest release of the EdgeDB command-line client (edgedb)"
   homepage "https://github.com/edgedb/edgedb-cli"
-  version "3.0.0-dev.925"
+  version "3.0.0-dev.926"
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.925+f9a86e4?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.926+310ff5b?edgedb.nightly",
         using: :nounzip
-      sha256 "813ba0d8176bf4ec06723874c469f1c812e3b79b154eb17ac65ddca987e81de9"
+      sha256 "53f591027c44971d295ab2a0fae21acd67a29bdfa0d3aa09559f6b00ecede75a"
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.925+ace26d4?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.926+a7ec4f2?edgedb.nightly",
         using: :nounzip
-      sha256 "f3a031fe9224ff0a967bb9f82798e744ca6eebfb160e86777fd65a0ae3417686"
+      sha256 "cc0fd17bd54b6890bf41544117cc0190fce7d5cfd00707e1008eb2facbcd3808"
     else
       odie "Unsupported CPU architecture!"
     end
@@ -19,13 +19,13 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.925+cb79a54?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.926+6f2a56e?edgedb.nightly",
         using: :nounzip
-      sha256 "38e4b2f35b1dd249970c9c7b80ce1cfc203a00a13cfcd69fef394a5070806b33"
+      sha256 "42d4d1b74fec051e25fc70d3a75da5c93bee9000af1ff4b2b5792f0707724c4e"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.925+b9ac412?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.926+43c18e2?edgedb.nightly",
         using: :nounzip
-      sha256 "360080a04888f95fad2238c56b7355c95a0ec7b6ccba117fbfc507ff19f958c4"
+      sha256 "1bf718078d7982e51d33674762b83c9aa415c3da0c0229d53936c3346510c8b1"
     else
       odie "Unsupported CPU architecture!"
     end
