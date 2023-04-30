@@ -19,9 +19,9 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.968+227675d?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.968+1dfb639?edgedb.nightly",
         using: :nounzip
-      sha256 "237a7f35fbbd09c433ad2c8809a9d122e4ab1971605dc8654c12f16757907ea8"
+      sha256 "73a3678c02c96716c4d82217dab3a1d06e0e57f574c550751d0b359def0ee011"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.968+59bb5f9?edgedb.nightly",
         using: :nounzip
