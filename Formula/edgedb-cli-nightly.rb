@@ -5,9 +5,9 @@ class EdgedbCliNightly < Formula
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.979+a17b0d2?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.979+44e8134?edgedb.nightly",
         using: :nounzip
-      sha256 "d6866538017472273a196e6ebd0456c246187fe55821c2eb083903079a65c6c8"
+      sha256 "a0f3e1b522ea9f1f712f4480f197ca4fa526416573729692535312c883fd3f91"
     elsif Hardware::CPU.intel?
       url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-3.0.0-dev.979+6515a66?edgedb.nightly",
         using: :nounzip
@@ -19,9 +19,9 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.979+c60d418?edgedb.nightly",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.979+2eec845?edgedb.nightly",
         using: :nounzip
-      sha256 "e328a63707de99674c825686ff6093e5be85a05b8f849294f5aa18de14d42ccd"
+      sha256 "ec627fa3e6115fddd778f4e06ebbe5be0b555067f4c515910a60351cd672fab8"
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.0.0-dev.979+4666c49?edgedb.nightly",
         using: :nounzip
