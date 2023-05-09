@@ -11,6 +11,7 @@ import json
 import functools
 import pathlib
 import sys
+import urllib.parse
 import urllib.request
 
 import jinja2
@@ -125,8 +126,11 @@ def get_tpl_data(channel: str) -> dict[str, Any]:
     for target, package in packages.items():
         for installref in package["installrefs"]:
             if installref["encoding"] == "identity":
+                url = "https://packages.edgedb.com" + installref["ref"]
+                parsed = urllib.parse.urlparse(url)
                 artifacts[target] = {
-                    "url": "https://packages.edgedb.com" + installref["ref"],
+                    "url": url,
+                    "file": parsed.path.split('/')[-1],
                     "sha256": installref["verification"]["sha256"],
                 }
 
@@ -153,8 +157,10 @@ def render_formula(path: pathlib.Path, channel: str) -> None:
 
 def main() -> None:
     release_cli = CURRENT_DIR / "Formula" / "edgedb-cli.rb"
+    testing_cli = CURRENT_DIR / "Formula" / "edgedb-cli-testing.rb"
     nightly_cli = CURRENT_DIR / "Formula" / "edgedb-cli-nightly.rb"
     render_formula(release_cli, channel="release")
+    render_formula(testing_cli, channel="testing")
     render_formula(nightly_cli, channel="nightly")
 
 
