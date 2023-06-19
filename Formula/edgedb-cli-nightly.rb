@@ -5,20 +5,20 @@ class EdgedbCliNightly < Formula
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.3.0-dev.1018+68cfc14",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin.nightly/edgedb-cli-3.3.0-dev.1018+4d3d1cc",
         using: :nounzip
-      sha256 "e8d0f240376a0d2f20b31ce0cbdbe0ef00e28e63f176a95488e5bec24adcd23c"
+      sha256 "ef89aafdf0728cb68139bd441c3e3edf14a953fa78def6122d569ea0fd00ad0b"
 
       def install
-        bin.install "edgedb-cli-3.3.0-dev.1018+68cfc14" => "edgedb-nightly"
+        bin.install "edgedb-cli-3.3.0-dev.1018+4d3d1cc" => "edgedb-nightly"
       end
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-3.3.0-dev.1018+add3738",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin.nightly/edgedb-cli-3.3.0-dev.1018+00f0d43",
         using: :nounzip
-      sha256 "07428761b9345f6e34e81e3129793f0a26c648c21e680c43f87d122b8c926c87"
+      sha256 "62d592d42ed4d8afb749d2e4618b175c80933efaafb27c811adda42bca6fb2ad"
 
       def install
-        bin.install "edgedb-cli-3.3.0-dev.1018+add3738" => "edgedb-nightly"
+        bin.install "edgedb-cli-3.3.0-dev.1018+00f0d43" => "edgedb-nightly"
       end
     else
       odie "Unsupported CPU architecture!"
@@ -27,12 +27,12 @@ class EdgedbCliNightly < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.3.0-dev.1018+9051ac7",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl.nightly/edgedb-cli-3.3.0-dev.1018+78a7fa0",
         using: :nounzip
-      sha256 "ec9bbe4cecc1c354491af125cb00be41c0e4cdd7c2390f1966b6492da091bbd5"
+      sha256 "fd4cf69b4c0f5d7088eb8ddb981e47e34cc5dc641460ebd1072a932ddbcb423e"
 
       def install
-        bin.install "edgedb-cli-3.3.0-dev.1018+9051ac7" => "edgedb-nightly"
+        bin.install "edgedb-cli-3.3.0-dev.1018+78a7fa0" => "edgedb-nightly"
       end
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
       url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.3.0-dev.1018+61ab591",
