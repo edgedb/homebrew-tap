@@ -35,12 +35,12 @@ class EdgedbCliNightly < Formula
         bin.install "edgedb-cli-3.4.0-dev.1021+09ebec6" => "edgedb-nightly"
       end
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.4.0-dev.1021+315020c",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl.nightly/edgedb-cli-3.4.0-dev.1021+04b71c7",
         using: :nounzip
-      sha256 "b6d2a14577d4fc42ccdf152fedb4aff6e4220c1946912d9edd39b781d60ac1f5"
+      sha256 "970f837c79880b3326fd23bd788a7e51ecde051c430ccb6fc9473d2a4ae5ebc6"
 
       def install
-        bin.install "edgedb-cli-3.4.0-dev.1021+315020c" => "edgedb-nightly"
+        bin.install "edgedb-cli-3.4.0-dev.1021+04b71c7" => "edgedb-nightly"
       end
     else
       odie "Unsupported CPU architecture!"
