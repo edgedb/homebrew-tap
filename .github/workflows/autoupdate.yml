@@ -5,9 +5,10 @@ on:
   workflow_dispatch:
     inputs: {}
 
+permissions:
+  contents: write
+
 jobs:
-  permissions:
-    contents: write
   update-commit:
     runs-on: ubuntu-latest
     steps:
