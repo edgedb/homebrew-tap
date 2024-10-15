@@ -1,24 +1,24 @@
 class EdgedbCli < Formula
   desc "Latest release of the EdgeDB command-line client (edgedb)"
   homepage "https://github.com/edgedb/edgedb-cli"
-  version "5.3.0"
+  version "5.5.1"
 
   on_macos do
     if Hardware::CPU.physical_cpu_arm64?
-      url "https://packages.edgedb.com/archive/aarch64-apple-darwin/edgedb-cli-5.3.0+637320a",
+      url "https://packages.edgedb.com/archive/aarch64-apple-darwin/edgedb-cli-5.5.1+cc9315a",
         using: :nounzip
-      sha256 "1ba101c30386dc579d1dec8a8733e0c8dfcadb6ce236ff0151e78b6cf6259880"
+      sha256 "5f7a7b4fcb28b057b2dd69528ed7d863db5e9c72e90a9ad6df0186fa791ad900"
 
       def install
-        bin.install "edgedb-cli-5.3.0+637320a" => "edgedb"
+        bin.install "edgedb-cli-5.5.1+cc9315a" => "edgedb"
       end
     elsif Hardware::CPU.intel?
-      url "https://packages.edgedb.com/archive/x86_64-apple-darwin/edgedb-cli-5.3.0+637320a",
+      url "https://packages.edgedb.com/archive/x86_64-apple-darwin/edgedb-cli-5.5.1+cc9315a",
         using: :nounzip
-      sha256 "7fbdb5987244785b49cb944ac084c6cdf6e1e5d20b4cce10996a18e9dec802d5"
+      sha256 "4ff5784f7baf59dfd3b4d72c3614295fd328faa9292029cfc4bbd85bd25e5761"
 
       def install
-        bin.install "edgedb-cli-5.3.0+637320a" => "edgedb"
+        bin.install "edgedb-cli-5.5.1+cc9315a" => "edgedb"
       end
     else
       odie "Unsupported CPU architecture!"
@@ -27,20 +27,20 @@ class EdgedbCli < Formula
 
   on_linux do
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl/edgedb-cli-5.3.0+b202cc8",
+      url "https://packages.edgedb.com/archive/aarch64-unknown-linux-musl/edgedb-cli-5.5.1+537d4ef",
         using: :nounzip
-      sha256 "be5f3bb6f16f90fe838fd4d1c54056782e626a38a6ad23c7afaf3f92754b2a96"
+      sha256 "a29d852f4039de38e4e9a80551c1ac17271e85f895cce2035a5f936aa7c064cf"
 
       def install
-        bin.install "edgedb-cli-5.3.0+b202cc8" => "edgedb"
+        bin.install "edgedb-cli-5.5.1+537d4ef" => "edgedb"
       end
     elsif Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl/edgedb-cli-5.3.0+637320a",
+      url "https://packages.edgedb.com/archive/x86_64-unknown-linux-musl/edgedb-cli-5.5.1+cc9315a",
         using: :nounzip
-      sha256 "06548595c98eabd03818f8ae6eb84447de75fee9768bd6f9ee870fb1cf01694c"
+      sha256 "6c395e392722dd33bdcd8ac04b4ba2091698600ed3b2144e3c52787f634ce559"
 
       def install
-        bin.install "edgedb-cli-5.3.0+637320a" => "edgedb"
+        bin.install "edgedb-cli-5.5.1+cc9315a" => "edgedb"
       end
     else
       odie "Unsupported CPU architecture!"
